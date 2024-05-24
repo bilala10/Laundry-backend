@@ -1,27 +1,22 @@
-// server.js
 const express = require('express');
 const dotenv = require('dotenv');
-const cors = require('cors');
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const userRoutes = require('./routes/userRoutes');
+const cors = require('cors');
 
-dotenv.config(); // Load environment variables from .env file
-connectDB(); // Connect to MongoDB
+dotenv.config();
+connectDB();
 
 const app = express();
 
-// Enable CORS for all routes
 app.use(cors());
-
-// Middleware to parse JSON bodies
 app.use(express.json());
 
-// Define API routes
-app.use('/api/auth', authRoutes); // Routes for authentication
-app.use('/api/orders', orderRoutes); // Routes for orders
-app.use('/api/users', userRoutes); // Routes for user management
+app.use('/api/auth', authRoutes);
+app.use('/api/orders', orderRoutes);
+app.use('/api/users', userRoutes);
 
 const PORT = process.env.PORT || 5002;
 
